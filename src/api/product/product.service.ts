@@ -1,16 +1,27 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import Product from './schemas/product.schema';
+import mongoose from 'mongoose';
 
 @Injectable()
 export class ProductService {
 
+    constructor(
+        @InjectModel(Product.name)private productModel:mongoose.Model<Product>,
+    ){}
 
 
-    createProduct(product){
+
+async  createProduct(productData){
+
+
+
+    const productdata  =  await this.productModel.create(productData)
 
 
 
 
-        return 
+      
 
     }
 
