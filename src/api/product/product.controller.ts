@@ -15,6 +15,7 @@ createProduct(@Body() productData){
 
 
   const newProductId  = this.productService.createProduct(productData)
+  
 
 return newProductId
 
