@@ -8,7 +8,7 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 
 
 export default class Product{
-    @Prop({required:true})
+    @Prop({required:true , unique:true})
     productId : string;
 
 
