@@ -29,11 +29,41 @@ export class ProductController {
   }
 
   @Delete('delete-product/:id')
-  deleteProduct() {}
+  deleteProduct(@Param("id") productId:string) {
+
+
+ const deleteData = this.productService.deleteProduct(productId)
+
+ return deleteData
+
+
+
+
+  }
 
   @Get('getall-Product')
-  getAllProduct() {}
+  getAllProduct() {
+
+
+
+
+      const  data =this.productService.getAllProduct();
+
+      return data
+
+
+
+
+
+  }
 
   @Get('by-id/:id')
-  getProductById() {}
+  getProductById(@Param("id") productId:string) {
+
+
+
+    const data =  this.productService.getProductById(productId)
+    return data 
+
+  }
 }
