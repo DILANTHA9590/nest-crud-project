@@ -62,7 +62,6 @@ const updateProduct   = await this.productModel.updateOne({productId:productId},
   
 if(updateProduct.matchedCount  == 0){
 
-  console.log("inside this");
 
 
   throw new NotFoundException(`Product updated fail  this ${productId} not found`)
@@ -101,7 +100,112 @@ return {
 
 
   
-  async deleteProduct() {}
-  async getAllProduct() {}
-  async getProductById() {}
+  async deleteProduct(productId:string) {
+
+
+
+    try {
+      
+
+
+
+      const deleteProduct = await this.productModel.findOneAndDelete({productId});
+
+
+if(!deleteProduct){
+
+  throw new NotFoundException(`Deleted failed , product_ID ${productId} not found`)
+}
+
+
+
+      
+
+return {
+  message :`Product id ${productId} deleted success`,
+}
+
+
+      
+    } catch (error) {
+
+
+
+       if (error.code === 11000) {
+
+    throw new ConflictException('Product ID already exists');
+    }
+
+    throw error;
+      
+    }
+
+
+
+    
+  }
+
+
+  async getAllProduct() {
+
+
+
+    try {
+
+      const getAllProduct = await this.productModel.find();
+
+    return {
+
+      message : "All products",
+      product : getAllProduct
+
+    }
+
+      
+    } catch (error) {
+    if (error.code === 11000) {
+
+    throw new ConflictException('Product ID already exists');
+    }
+
+    throw error;
+      
+    }
+  }
+  async getProductById(productId:string) {
+
+try {
+
+      const getProduct = await this.productModel.findOne({productId:productId});
+
+      if(!getProduct){
+
+
+
+      throw new NotFoundException("no product found this id",productId);
+
+      }
+
+      
+
+    return {
+
+      message : "All products",
+      product : getProduct
+
+    }
+
+      
+    } catch (error) {
+    if (error.code === 11000) {
+
+    throw new ConflictException('Product ID already exists');
+    }
+
+    throw error;
+      
+    }
+    
+
+  }
 }
