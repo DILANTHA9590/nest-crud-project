@@ -29,41 +29,22 @@ export class ProductController {
   }
 
   @Delete('delete-product/:id')
-  deleteProduct(@Param("id") productId:string) {
+  deleteProduct(@Param('id') productId: string) {
+    const deleteData = this.productService.deleteProduct(productId);
 
-
- const deleteData = this.productService.deleteProduct(productId)
-
- return deleteData
-
-
-
-
+    return deleteData;
   }
 
   @Get('getall-Product')
   getAllProduct() {
+    const data = this.productService.getAllProduct();
 
-
-
-
-      const  data =this.productService.getAllProduct();
-
-      return data
-
-
-
-
-
+    return data;
   }
 
   @Get('by-id/:id')
-  getProductById(@Param("id") productId:string) {
-
-
-
-    const data =  this.productService.getProductById(productId)
-    return data 
-
+  getProductById(@Param('id') productId: string) {
+    const data = this.productService.getProductById(productId);
+    return data;
   }
 }
